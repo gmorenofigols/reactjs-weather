@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import AutorenewIcon from '@material-ui/icons/Autorenew';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,17 +20,18 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
   headerColour: {
-    backgroundColor: '#2196f3',
+    backgroundColor: '#8bc34a',
   },
   headerTransparent: {
     backgroundColor: 'transparent',
   },
 }));
 
-const Header = () => {
+const Header = (props) => {
   const classes = useStyles();
   const [headerBackground, setHeaderBackground] = useState('headerColour');
   const [thresholdScroll, setThresholdScroll] = useState(0);
+  const [units, setUnits] = useState("K")
 
   const navRef = React.useRef();
   navRef.current = headerBackground;
@@ -52,6 +54,19 @@ const Header = () => {
     }
   }, [thresholdScroll]);
 
+  const handleClick = () =>{
+    if(units === "K")
+      setUnits("Cº")
+    else if(units === "Cº")
+      setUnits("ºF")
+    else
+      setUnits("K")
+  }
+
+  useEffect(() => {
+    props.handleDisplayUnits(units)
+  }, [units, props]);
+
   return (
     <div className ={classes.root}>
       <AppBar position="fixed" className={classes[navRef.current]}>
@@ -62,7 +77,9 @@ const Header = () => {
           <Typography variant="h5" className={classes.title} color="secondary">
             Open Weather Assignment
           </Typography>
-          <Button color="primary">About me</Button>
+          <Button color="primary" onClick={handleClick} startIcon={<AutorenewIcon/>}>
+            Units: {units}
+          </Button>
         </Toolbar>
       </AppBar>
     </div>

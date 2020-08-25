@@ -12,10 +12,16 @@ const locations = [
     value: 'Aarhus',
   },
   {
-    value: 'Alborg',
+    value: 'Aalborg',
   },
   {
     value: 'Odense',
+  },
+  {
+    value: 'Madrid',
+  },
+  {
+    value: 'Barcelona',
   },
 ];
 
@@ -58,7 +64,7 @@ const LocationSelector = (props) => {
                     </MenuItem>
                 ))}
                 </TextField>
-                <Button type="submit" variant = "outlined" color = "secondary">Search</Button>
+                <Button type="submit" variant = "outlined" color = "inherit">Search</Button>
             </div>
         </form>
     );
